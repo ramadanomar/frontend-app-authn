@@ -7,16 +7,13 @@ import {
   REGISTER_SET_EMAIL_SUGGESTIONS,
   REGISTER_SET_USER_PIPELINE_DATA_LOADED,
   REGISTRATION_CLEAR_BACKEND_ERROR,
-} from './actions';
-import {
-  DEFAULT_STATE,
-  PENDING_STATE,
-} from '../../data/constants';
+} from "./actions";
+import { DEFAULT_STATE, PENDING_STATE } from "../../data/constants";
 
-export const storeName = 'register';
+export const storeName = "register";
 
 export const defaultState = {
-  backendCountryCode: '',
+  backendCountryCode: "",
   registrationError: {},
   registrationResult: {},
   registrationFormData: {
@@ -24,13 +21,22 @@ export const defaultState = {
       marketingEmailsOptIn: true,
     },
     formFields: {
-      name: '', email: '', username: '', password: '',
+      name: "",
+      email: "",
+      username: "",
+      password: "",
+      phone_number: "+40",
     },
     emailSuggestion: {
-      suggestion: '', type: '',
+      suggestion: "",
+      type: "",
     },
     errors: {
-      name: '', email: '', username: '', password: '',
+      name: "",
+      email: "",
+      username: "",
+      password: "",
+      phone_number: "",
     },
   },
   validations: null,
@@ -86,7 +92,8 @@ const reducer = (state = defaultState, action = {}) => {
       };
     }
     case REGISTER_FORM_VALIDATIONS.SUCCESS: {
-      const { usernameSuggestions, ...validationWithoutUsernameSuggestions } = action.payload.validations;
+      const { usernameSuggestions, ...validationWithoutUsernameSuggestions } =
+        action.payload.validations;
       return {
         ...state,
         validations: validationWithoutUsernameSuggestions,
